@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <title>ESCOLA SABER</title>
+    <link rel="icon" href="public/img/logo.png" type="image/png">
+    <style>
+        body {
+            background-image: url('public/img/fundo.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0; 
+            padding: 0;
+        }
+
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 20px 0;
+            z-index: 1;
+        }
+
+        .header img {
+            max-width: 600px;
+            height: auto;
+        }
+
+        .container {
+            background-color: white; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            margin: 20px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            color: #007BFF;
+            font-family: 'Mary Kate', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            font-family: 'ABeeZee', sans-serif;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav button.home {
+            background-color: #FDD05A;
+        }
+
+        nav button.cadastrar {
+            background-color: #E05E1C;
+        }
+
+        nav button.listar {
+            background-color: #61D4B4;
+        }
+
+        nav button:hover {
+            opacity: 0.8;
+        }
+
+        .lista {
+            color: rgb(24, 92, 131);
+            font-size: 20x;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: left;
+            background-color: #D8B58C;
+        }
+
+        th {
+            background-color: #D8B58C;
+            color: #fff; 
+        }
+
+        form, .lista, table {
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        form {
+            background-color: white;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            nav button {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            table, th, td {
+                font-size: 14px;
+            }
+
+            .header img {
+                max-width: 80px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Mary+Kate&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <img src="public/img/logo.png" alt="Logo da Empresa" />
+    </div>
+
+    <div class="container">
+        <nav>
+            <button class="home" onclick="showSection('home')">Home</button>
+            <button class="cadastrar" onclick="showSection('cadastrar')">Cadastrar</button>
+            <button class="listar" onclick="showSection('listar')">Listar</button>
+        </nav>
+
+        <div id="home" style="display: block;">
+            <h2>Cadastro de Alunos</h2>
+            <p>Bem-vindo ao sistema de cadastro de alunos!</p>
+        </div>
+
+        <div id="cadastrar" style="display: none;">
+            <h2>Cadastrar Aluno</h2>
+            <p>Utilize este formulário para registrar novos alunos. É importante manter as informações atualizadas para facilitar o gerenciamento e a comunicação com as famílias.</p>
+            
+            <section>
+                <h3>Importância do Cadastro</h3>
+                <ul>
+                    <li>Permite a organização eficiente das informações dos alunos.</li>
+                    <li>Facilita a comunicação sobre eventos e novidades da escola.</li>
+                    <li>Auxilia na elaboração de relatórios e estatísticas escolares.</li>
+                </ul>
+            </section>
+
+            <form id="form-cadastro" onsubmit="return cadastrarAluno(event)">
+                <table>
+                    <tr>
+                        <th><label for="nome">Nome:</label></th>
+                        <td><input type="text" id="nome" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="email">E-mail:</label></th>
+                        <td><input type="email" id="email" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="foto">Foto:</label></th>
+                        <td><input type="file" id="foto" accept="image/*" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="termos">Aceitar termos:</label></th>
+                        <td>
+                            <input type="checkbox" id="termos" required>
+                            <label for="termos">Eu aceito os termos e condições</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right;">
+                            <button type="submit">Cadastrar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            <section>
+                <h3>Dicas para Preenchimento</h3>
+                <p>Certifique-se de inserir um e-mail válido e uma foto clara do aluno. O tamanho máximo da foto deve ser de 2MB para garantir que o sistema funcione corretamente.</p>
+            </section>
+        </div>
+
+        <div id="listar" style="display: none;">
+            <h3 class="lista">Lista de Nomes</h3>
+            <button onclick="imprimirLista()" style="margin-bottom: 10px;">Imprimir Lista</button>
+            <table>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
+                </tr>
+                <tbody id="alunos-lista"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const alunoManager = {
+            alunos: [],
+
+            adicionarAluno(foto, nome, email) {
+                this.alunos.push({ foto, nome, email });
+            },
+
+            listarAlunos() {
+                const tbody = document.getElementById('alunos-lista');
+                tbody.innerHTML = '';
+                this.alunos.forEach((aluno, index) => {
+                    const row = `<tr>
+                        <td><img src="${aluno.foto}" alt="${aluno.nome}" style="width:50px;"/></td>
+                        <td>${aluno.nome}</td>
+                        <td>${aluno.email}</td>
+                        <td>
+                            <button onclick="alunoManager.editarAluno(${index})">Editar</button>
+                            <button onclick="alunoManager.excluirAluno(${index})">Excluir</button>
+                        </td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                });
+            },
+
+            editarAluno(index) {
+                const aluno = this.alunos[index];
+                document.getElementById('nome').value = aluno.nome;
+                document.getElementById('email').value = aluno.email;
+                document.getElementById('foto').value = '';
+                showSection('cadastrar');
+
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.id = 'index-aluno';
+                hiddenInput.value = index;
+                document.getElementById('form-cadastro').appendChild(hiddenInput);
+            },
+
+            excluirAluno(index) {
+                if (confirm('Tem certeza que deseja excluir este aluno?')) {
+                    this.alunos.splice(index, 1);
+                    this.listarAlunos();
+                }
+            }
+        };
+
+        function showSection(section) {
+            ['home', 'cadastrar', 'listar'].forEach(sec => {
+                document.getElementById(sec).style.display = 'none';
+            });
+            document.getElementById(section).style.display = 'block';
+            
+            if (section === 'listar') {
+                alunoManager.listarAlunos();
+            }
+        }
+
+        function cadastrarAluno(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const fotoInput = document.getElementById('foto');
+
+            const file = fotoInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    alunoManager.adicionarAluno(e.target.result, nome, email);
+                    document.getElementById('form-cadastro').reset();
+                    alert('Aluno cadastrado com sucesso!');
+                    showSection('listar');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function imprimirLista() {
+            const conteudo = document.querySelector('#listar').innerHTML;
+            const janelaImpressao = window.open('', '', 'height=600,width=800');
+            janelaImpressao.document.write('<html><head><title>Imprimir Lista</title></head><body>');
+            janelaImpressao.document.write(conteudo);
+            janelaImpressao.document.write('</body></html>');
+            janelaImpressao.document.close();
+            janelaImpressao.print();
+        }
+    </script>
+</body>
+</html>
